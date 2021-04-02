@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace Pascal.Wallet.Connector.DTO
 {
-    //https://www.pascalcoin.org/development/rpc#payloaddecrypt
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#payloaddecrypt">https://www.pascalcoin.org/development/rpc#payloaddecrypt</see></remarks>
     public class EncryptionResult
     {
         /// <summary>True if decryption was successful, otherwise - false</summary>

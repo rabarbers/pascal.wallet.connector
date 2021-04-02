@@ -5,7 +5,6 @@
 
 namespace Pascal.Wallet.Connector.DTO
 {
-    /// <summary></summary>
     /// <remarks><see href="https://www.pascalcoin.org/development/rpc#operation-object">https://www.pascalcoin.org/development/rpc#operation-object</see></remarks>
     public enum OperationType
     {

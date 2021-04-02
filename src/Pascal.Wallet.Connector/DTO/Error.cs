@@ -8,7 +8,8 @@ using System.Text.Json.Serialization;
 
 namespace Pascal.Wallet.Connector.DTO
 {
-    /// <summary>JSON-RPC Error DTO <see href="https://www.pascalcoin.org/development/rpc#error-codes">https://www.pascalcoin.org/development/rpc#error-codes</see></summary>
+    /// <summary>JSON-RPC Error DTO</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#error-codes">https://www.pascalcoin.org/development/rpc#error-codes</see></remarks>
     public class Error
     {
         [JsonPropertyName("code")]

@@ -17,10 +17,11 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("jsonrpc")]
         public string JsonRpc { get; set; }
 
+        /// <summary>If the RPC method call was successfull then this property contains the result (output) of the RPC method call</summary>
         [JsonPropertyName("result")]
         public T Result { get; set; }
 
-        /// <summary>If not null then the operation was not successfull and this property contains the Error description</summary>
+        /// <summary>If not null then the RPC method call was not successfull and this property contains the Error description</summary>
         [JsonPropertyName("error")]
         public Error Error { get; set; }
     }

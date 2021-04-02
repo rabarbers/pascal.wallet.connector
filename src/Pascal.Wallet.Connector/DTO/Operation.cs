@@ -75,7 +75,7 @@ namespace Pascal.Wallet.Connector.DTO
 
         /// <summary>PASCURRENCY - Amount of coins transferred from sender account to destination account including transaction fee (Only apply when operation Type = (Transaction or DataOperation))</summary>
         [JsonPropertyName("amount")]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         /// <summary></summary>
         [JsonPropertyName("payload")]
@@ -92,7 +92,7 @@ namespace Pascal.Wallet.Connector.DTO
         /// <summary>PASCURRENCY - Balance of account after this block is introduced in the Blockchain</summary>
         /// <remarks>Balance is a calculation based on current safebox account balance and previous operations, it's only returned on pending operations and account operations.</remarks>
         [JsonPropertyName("balance")]
-        public decimal Balance { get; set; }
+        public decimal? Balance { get; set; }
     }
 
     /// <summary>Contains information about an operation created offline</summary>

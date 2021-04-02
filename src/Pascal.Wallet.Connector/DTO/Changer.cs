@@ -27,14 +27,15 @@ namespace Pascal.Wallet.Connector.DTO
         public int? NewType { get; set; }
     }
 
-    /// <summary>Changer structure for creating MultiOperation</summary>
+    /// <summary>Receiver structure for creating a MultiOperation</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#multioperationaddoperation">https://www.pascalcoin.org/development/rpc#multioperationaddoperation</see></remarks>
     public class Changer: ChangerBase
     {
         /// <summary>(optional) - if not provided, will use current safebox n_operation+1 value (on online wallets)</summary>
         [JsonPropertyName("n_operation")]
         public uint? NOperation { get; set; }
 
-        //Do not remove this constructor, it is used be deserializer
+        //Do not remove this constructor, it is used by deserializer
         public Changer() { }
 
         /// <summary></summary>
@@ -53,6 +54,8 @@ namespace Pascal.Wallet.Connector.DTO
         }
     }
 
+    /// <summary>Changer structure returned by Wallet</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#operation-object">https://www.pascalcoin.org/development/rpc#operation-object</see></remarks>
     public class ExtendedChanger: ChangerBase
     {
         /// <summary>Operations made by Account</summary>

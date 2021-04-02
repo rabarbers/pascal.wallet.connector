@@ -9,7 +9,8 @@ using System.Text.Json.Serialization;
 
 namespace Pascal.Wallet.Connector.DTO
 {
-    /// <summary><see href="https://www.pascalcoin.org/development/rpc#block-object">https://www.pascalcoin.org/development/rpc#block-object</see></summary>
+    /// <summary>Contains information about a Blockchain's block.</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#block-object">https://www.pascalcoin.org/development/rpc#block-object</see></remarks>
     public class Block
     {
         /// <summary>Block number</summary>

@@ -6,7 +6,8 @@
 
 namespace Pascal.Wallet.Connector.DTO
 {
-    /// <summary><see href="https://www.pascalcoin.org/development/rpc#sendto">https://www.pascalcoin.org/development/rpc#sendto</see></summary>
+    /// <summary>Payload encryption method</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#sendto">https://www.pascalcoin.org/development/rpc#sendto</see></remarks>
     public enum PayloadMethod
     {
         /// <summary>No encryption. Will be visible for everybody.</summary>
@@ -19,7 +20,8 @@ namespace Pascal.Wallet.Connector.DTO
         Aes
     }
 
-    /// <summary><see href="https://www.pascalcoin.org/development/rpc#payloaddecrypt">https://www.pascalcoin.org/development/rpc#payloaddecrypt</see></summary>
+    /// <summary>Payload encryption method</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#payloaddecrypt">https://www.pascalcoin.org/development/rpc#payloaddecrypt</see></remarks>
     public enum AbstractPayloadMethod
     {
         /// <summary>No encryption. Will be visible for everybody.</summary>

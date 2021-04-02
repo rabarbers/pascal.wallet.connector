@@ -10,7 +10,9 @@ namespace Pascal.Wallet.Connector.DTO
 	[JsonConverter(typeof(JsonStringEnumConverter))]
 	public enum AccountState
 	{
+		/// <summary>Normal account - not listed for sale</summary>
 		Normal,
+		/// <summary>Listed for sale</summary>
 		Listed
 	}
 }

@@ -8,7 +8,8 @@ using System.Text.Json.Serialization;
 
 namespace Pascal.Wallet.Connector.DTO
 {
-    /// <summary>Changer structure for creating MultiOperation</summary>
+    /// <summary>Receiver structure for creating a MultiOperation</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#multioperationaddoperation">https://www.pascalcoin.org/development/rpc#multioperationaddoperation</see></remarks>
     public class Receiver
     {
         /// <summary>Receiving Account</summary>
@@ -27,10 +28,11 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("payload_type")]
         public PayloadType PayloadType { get; set; }
 
-        //Do not remove this constructor, it is used be deserializer, otherwise deserialized uses parametrized constructor and hexastring encoding is executed twice
+        //Do not remove this constructor, it is used by deserializer, otherwise deserializer uses parametrized constructor and hexastring encoding is executed twice
         public Receiver() { }
-        
+
         /// <summary>Cretaes Receiver object</summary>
+        /// <param name="amount">PASCURRENCY in positive format</param>
         /// <param name="payload">HEXASTRING</param>
         public Receiver(uint accountNumber, decimal amount, string payload = null, PayloadType payloadType = PayloadType.NonDeterministic)
         {
@@ -41,7 +43,7 @@ namespace Pascal.Wallet.Connector.DTO
         }
     }
 
-    /// <summary></summary>
+    /// <summary>Receiver structure returned by Wallet</summary>
     /// <remarks><see href="https://www.pascalcoin.org/development/rpc#operation-object">https://www.pascalcoin.org/development/rpc#operation-object</see></remarks>
     public class ExtendedReceiver: Receiver
     {

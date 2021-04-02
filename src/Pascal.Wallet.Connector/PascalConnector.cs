@@ -55,7 +55,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="b58PublicKey">If provided, return only accounts of this public key </param>
         /// <param name="start">If provided, will return wallet accounts starting at this position (index starts at position 0). If not provided, start=0 by default.</param>
         /// <param name="max">If provided, will return max accounts. If not provided, max=100 by default.</param>
-        /// <remarks>If use enc_pubkey and b58_pubkey together and is not the same public key, will return an error</remarks>
+        /// <remarks>If use encodedPublicKey and b58PublicKey together and is not the same public key, will return an error</remarks>
         public Task<Response<Account[]>> GetWalletAccountsAsync(string encodedPublicKey = null, string b58PublicKey = null, uint? start = null, uint? max = null)
         {
             var parameters = new
@@ -73,7 +73,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="b58PublicKey">If provided, return only accounts of this public key </param>
         /// <param name="start">If provided, will return wallet accounts starting at this position (index starts at position 0). If not provided, start=0 by default.</param>
         /// <param name="max">If provided, will return max accounts. If not provided, max=100 by default.</param>
-        /// <remarks>If use enc_pubkey and b58_pubkey together and is not the same public key, will return an error</remarks>
+        /// <remarks>If use encodedPublicKey and b58PublicKey together and is not the same public key, will return an error</remarks>
         public Task<Response<uint>> GetWalletAccountsCountAsync(string encodedPublicKey = null, string b58PublicKey = null, uint? start = null, uint? max = null)
         {
             var parameters = new
@@ -99,7 +99,7 @@ namespace Pascal.Wallet.Connector
             return InvokeAsync<WalletPublicKey[]>("getwalletpubkeys", Serialize(parameters));
         }
 
-        /// <summary>Search for a public key in the wallet. If use enc_pubkey and b58_pubkey together and is not the same public key, will return an error.</summary>
+        /// <summary>Search for a public key in the wallet. If use encodedPublicKey and b58PublicKey together and is not the same public key, will return an error.</summary>
         /// <param name="encodedPublicKey">HEXASTRING (optional). If provided, return only this public key balance</param>
         /// <param name="b58PublicKey">String (optional). If provided, return only this public key balance</param>
         public Task<Response<PublicKey>> GetWalletPublicKeyAsync(string encodedPublicKey = null, string b58PublicKey = null)
@@ -112,7 +112,7 @@ namespace Pascal.Wallet.Connector
             return InvokeAsync<PublicKey>("getwalletpubkey", Serialize(parameters));
         }
 
-        /// <summary>Get wallet coins total balance (total or filtered by public key). If use enc_pubkey and b58_pubkey together and is not the same public key, will return an error.</summary>
+        /// <summary>Get wallet coins total balance (total or filtered by public key). If use encodedPublicKey and b58PublicKey together and is not the same public key, will return an error.</summary>
         /// <param name="encodedPublicKey">HEXASTRING (optional). If provided, return only this public key balance</param>
         /// <param name="b58PublicKey">String (optional). If provided, return only this public key balance</param>
         public Task<Response<double>> GetWalletCoinsAsync(string encodedPublicKey = null, string b58PublicKey = null)
@@ -244,7 +244,7 @@ namespace Pascal.Wallet.Connector
             return InvokeAsync<Account[]>("findaccounts", Serialize(parameters));
         }
 
-        /// <summary>Executes a transaction operation from "sender" to "target"</summary>
+        /// <summary>Executes a transaction operation from "senderAccount" to "receiverAccount"</summary>
         /// <param name="senderAccount">Sender account</param>
         /// <param name="receiverAccount">Destination account</param>
         /// <param name="amount">Coins to be transferred</param>
@@ -330,7 +330,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Operation object</returns>
         public Task<Response<Operation>> ChangeKeyAsync(uint account, string newEncodedPublicKey = null, string newB58PublicKey = null, decimal? fee = null, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
         {
@@ -354,7 +354,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Array of Operation objects</returns>
         public Task<Response<Operation[]>> ChangeKeysAsync(IEnumerable<uint> accounts, string newEncodedPublicKey = null, string newB58PublicKey = null, decimal? fee = null, string payload = null, PayloadMethod? payloadMethod = PayloadMethod.None, string password = null)
         {
@@ -382,7 +382,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="lockedUntilBlock">Block number until this account will be locked (a locked account cannot execute operations while locked)</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload</param>
-        /// <param name="password">Used to encrypt payload with Aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with Aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>If operation is successfull will return an Operation object.</returns>
         public Task<Response<Operation>> ListAccountForSaleAsync(uint accountForSale, uint sellerAccount, decimal price, uint signerAccount, decimal? fee = null, string newEncodedPublicKey = null,
             string newB58PublicKey = null, uint lockedUntilBlock = 0, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
@@ -411,7 +411,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">PASCURRENCY - Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload</param>
-        /// <param name="password">Used to encrypt payload with Aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with Aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>If operation is successfull will return an Operation object.</returns>
         public Task<Response<Operation>> DelistAccountForSaleAsync(uint accountNumber, uint signerAccount, decimal? fee = null, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
         {
@@ -438,7 +438,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">PASCURRENCY - Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload</param>
-        /// <param name="password">Used to encrypt payload with Aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with Aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>If operation is successfull will return an Operation object.</returns>
         public Task<Response<Operation>> BuyAccountAsync(uint buyerAccount, uint accountToPurchase, decimal amount, decimal? fee = null, string newEncodedPublicKey = null,
             string newB58PublicKey = null, decimal? price = null, uint? sellerAccount = null, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
@@ -470,7 +470,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload (by default = Destination)</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Operation object</returns>
         public Task<Response<Operation>> ChangeAccountInfoAsync(uint accountTarget, uint? signerAccount = null, string newEncodedPublicKey = null,
             string newB58PublicKey = null, string newName = null, uint? newType = null, decimal? fee = null, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
@@ -504,7 +504,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload (by default = Destination)</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <remarks>Wallet must be unlocked and sender private key(searched with provided public key) must be in wallet. No other checks are made(no checks for valid target, valid n_operation, valid amount or fee ...)</remarks>
         /// <returns>Returns a Raw Operations Object</returns>
         public Task<Response<RawOperation>> SignSendToAsync(uint senderAccount, uint receiverAccount, uint amount, uint lastNOperation, decimal fee = 0, string senderEncodedPublicKey = null, string senderB58PublicKey = null,
@@ -548,7 +548,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="senderB58PublicKey">HEXASTRING - The current public key of senderAccount in b58 format</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload (by default = None)</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Returns a Raw Operations Object</returns>
         public Task<Response<RawOperation>> SignDataAsync(uint signerAccount, uint? senderAccount = null, uint? receiverAccount = null, string guid = null, uint? lastNOperation = null, DataType? dataType = null,
             uint? dataSequence = null, decimal? amount = null, decimal? fee = null, string rawOperations = null, string signerEncodedPublicKey = null, string signerB58PublicKey = null, string receiverEncodedPublicKey = null,
@@ -590,7 +590,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="fee">Fee of the operation</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload (by default = Destination)</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <remarks>Wallet must be unlocked and private key (searched with provided public key) must be in wallet. No other checks are made (no checks for valid n_operation, valid fee ...) </remarks>
         /// <returns>Returns a Raw Operations Object</returns>
         public Task<Response<RawOperation>> SignChangeKeyAsync(uint account, uint lastNOperation, decimal fee = 0, string oldEncodedPublicKey = null, string oldB58PublicKey = null,
@@ -665,7 +665,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="signerB58PublicKey">HEXASTRING - The current public key of signerAccount in b58 format</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload (by default = Destination)</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Returns a Raw Operations Object</returns>
         public Task<Response<RawOperation>> SignDelistAccountForSaleAsync(uint accountNumber, uint signerAccount, uint lastNOperation, decimal fee = 0,
             string rawOperations = null, string signerEncodedPublicKey = null, string signerB58PublicKey = null, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
@@ -701,7 +701,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="signerB58PublicKey">HEXASTRING - The current public key of buyer_account in b58 format</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload</param>
-        /// <param name="password">Used to encrypt payload with Aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with Aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Returns a Raw Operations Object</returns>
         public Task<Response<RawOperation>> SignBuyAccountAsync(uint buyerAccount, uint accountToPurchase, uint sellerAccount, decimal price, decimal amount, uint lastNOperation, decimal? fee = null,
             string newEncodedPublicKey = null, string newB58PublicKey = null, string rawOperations = null, string signerEncodedPublicKey = null, string signerB58PublicKey = null,
@@ -742,7 +742,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="signerB58PublicKey">HEXASTRING - The current public key of account_signer in b58 format</param>
         /// <param name="payload">Payload "item" that will be included in this operation</param>
         /// <param name="payloadMethod">Encode type of the item payload (by default = Destination)</param>
-        /// <param name="password">Used to encrypt payload with aes as a payload_method. If none equals to empty password.</param>
+        /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <returns>Returns a Raw Operations Object</returns>
         public Task<Response<RawOperation>> SignChangeAccountInfoAsync(uint accountTarget, uint signerAccount, uint lastNOperation, string newEncodedPublicKey = null,
             string newB58PublicKey = null, string newName = null, uint? newType = null, decimal? fee = null, string rawOperations = null,
@@ -1032,7 +1032,7 @@ namespace Pascal.Wallet.Connector
             try
             {
                 var response = await _httpClient.PostAsync(_url, content);
-                var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
+                //var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
                 var responseContentStream = await response.Content.ReadAsStreamAsync();
                 var deserializeOptions = new JsonSerializerOptions()
                 {

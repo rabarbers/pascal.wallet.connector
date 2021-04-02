@@ -35,7 +35,7 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("n_operation")]
         public uint? NOperation { get; set; }
 
-        //Do not remove this constructor, it is used be deserializer, otherwise deserialized uses parametrized constructor and hexastring encoding is executed twice
+        //Do not remove this constructor, it is used by deserializer, otherwise deserializer uses parametrized constructor and hexastring encoding is executed twice
         public Sender() { }
 
         /// <summary>Creates Sender object</summary>
@@ -52,7 +52,8 @@ namespace Pascal.Wallet.Connector.DTO
         }
     }
 
-    /// <summary><see href="https://www.pascalcoin.org/development/rpc#operation-object">https://www.pascalcoin.org/development/rpc#operation-object</see></summary>
+    /// <summary>Sender structure returned by Wallet</summary>
+    /// <remarks><see href="https://www.pascalcoin.org/development/rpc#operation-object">https://www.pascalcoin.org/development/rpc#operation-object</see></remarks>
     public class ExtendedSender: SenderBase
     {
         /// <summary>Operations made by Account</summary>
