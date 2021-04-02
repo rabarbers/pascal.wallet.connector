@@ -114,7 +114,7 @@ namespace Pascal.Wallet.Connector.Demo
             //executed online
             var coldWalletSendingExecutionResponse = await connector.ExecuteOperationsAsync(operations);
             var isValidOperation = coldWalletSendingExecutionResponse.Result?.SingleOrDefault()?.Valid ?? false;
-            if (coldWalletSendingExecutionResponse.Error != null && isValidOperation)
+            if (coldWalletSendingExecutionResponse.Error == null && isValidOperation)
             {
                 Console.WriteLine("Successfully executed Pascals sending transaction that was created in cold wallet");
             }

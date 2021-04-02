@@ -114,7 +114,7 @@ var operations = coldWalletSendingResponse.Result?.RawOperations;
 //executed online
 var coldWalletSendingExecutionResponse = await connector.ExecuteOperationsAsync(operations);
 var isValidOperation = coldWalletSendingExecutionResponse.Result?.SingleOrDefault()?.Valid ?? false;
-if (coldWalletSendingExecutionResponse.Error != null && isValidOperation)
+if (coldWalletSendingExecutionResponse.Error == null && isValidOperation)
 {
     Console.WriteLine("Successfully executed Pascals sending transaction that was created in cold wallet");
 }
@@ -124,6 +124,11 @@ else
     Console.WriteLine($"Cold wallet operation failed. Error details: {errors}");
 }
 ```
+
+### Pascal.Wallet.Connector supported features
+Pascal Wallet JSON RPC API methods [(Wallet version 3.0)](https://www.pascalcoin.org/development/rpc).    
+Updated data structures (Wallet version 5.4.)  
+DataOperation methods: SendDataAsync, SignDataAsync, FindDataOperationsAsync. More details in [PIP-0033](https://www.pascalcoin.org/development/pips/pip-0033).  
 
 ### Known issues
 Cold wallet operation SendToAsync does not recognize accounts in MainNet.  
