@@ -129,6 +129,7 @@ else
 Cold wallet operation SendToAsync does not recognize accounts in MainNet.  
 Operation.Amount for SendToAsync returns sent Pasc, but for SendDataAsync it returns sent Pasc + transaction fee.  
 It is not clear if Block.Nonce field represents meaningful value.  
+GetWalletAccountsAsync returns empty array if parameter encodedPublicKey or b58PublicKey is provided.  
 
 ### For technical support contact Rabarbers and be polite
 ## Roadmap
