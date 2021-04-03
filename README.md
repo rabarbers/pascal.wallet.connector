@@ -1,5 +1,5 @@
 # Pascal.Wallet.Connector
-Based on the source code of [NPascalCoin](https://github.com/Sphere10/NPascalCoin) and Pascal Wallet JSON RPC API [Specification & Guidelines](https://www.pascalcoin.org/development/rpc)  
+Based on the source code of [NPascalCoin](https://github.com/Sphere10/NPascalCoin) and Pascal Wallet JSON RPC API [Specification & Guidelines](https://www.pascalcoin.org/development/rpc).  
 Pascal.Wallet.Connector is a .NET 5 library to call PascalCoin Wallet JSON RPC API method calls. Pascal.Wallet.Connector is implemented in C# and does not depend on other packages or libraries. The main idea of Pascal.Wallet.Connector is to improve user engagement in Pascal app development and to improve the documentation of the Pascal Wallet JSON RPC API methods. Code fragments from this repository can easily be copied. This repository has good Unit Tests which acts like documentation demonstrating how to use Pascal.Wallet.Connector library.
 ## .NET5 library to call Pascal full node Wallet JSON RPC API methods
 Link to Nuget.org package...
