@@ -126,7 +126,10 @@ else
 ```
 
 ### Error checking
-According to [JSON RPC Specification](https://www.jsonrpc.org/specification) if the RPC method call is successfull, then the field 'Result' of the response object is not null and the 'Error' is null. If the RPC method call is not successfull, then the field 'Error' is not null and 'Result' is null. Note that some objects like RawOperations contains inner data fields with error messages and validity information.
+According to [JSON RPC Specification](https://www.jsonrpc.org/specification) if the RPC method call is successfull,
+then the field 'Result' of the response object is not null and the 'Error' is null.
+If the RPC method call is not successfull, then the field 'Error' is not null and 'Result' is null.
+Note that some objects like RawOperations contains inner data fields with error messages and validity information.
 
 ### Pascal.Wallet.Connector supported features
 * Pascal Wallet JSON RPC API methods [(Documentation for Wallet version 3.0)](https://www.pascalcoin.org/development/rpc).  
@@ -134,10 +137,11 @@ According to [JSON RPC Specification](https://www.jsonrpc.org/specification) if 
 * DataOperation methods: SendDataAsync, SignDataAsync, FindDataOperationsAsync. More details in [PIP-0033](https://www.pascalcoin.org/development/pips/pip-0033).  
 
 ### Known issues
-* Cold wallet operation SendToAsync does not recognize accounts in MainNet.  
+* Cold wallet operation SignSendToAsync does not recognize accounts in MainNet.  
 * Operation.Amount for SendToAsync returns sent Pasc, but for SendDataAsync it returns sent Pasc + transaction fee.  
 * It is not clear if Block.Nonce field represents meaningful value.  
 * GetWalletAccountsAsync returns empty array if parameter encodedPublicKey or b58PublicKey is provided.  
+* Wallet RPC methods 'checkepasa' and 'validateepasa' returns response object which does not correspond JSON RPC specification and field 'account' sometimes can return numeric value, sometimes - string. Currently Pascal.Wallet.Connector does not support these methods.
 
 ### For technical support contact Rabarbers and be polite
 
