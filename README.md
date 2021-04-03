@@ -142,6 +142,7 @@ Note that some objects like RawOperations contains inner data fields with error 
 * It is not clear if Block.Nonce field represents meaningful value.  
 * GetWalletAccountsAsync returns empty array if parameter encodedPublicKey or b58PublicKey is provided.  
 * Wallet RPC methods 'checkepasa' and 'validateepasa' returns response object which does not correspond JSON RPC specification and field 'account' sometimes can return numeric value, sometimes - string. Currently Pascal.Wallet.Connector does not support these methods.
+* VerifyMessageAsync might return true even if wrong digest message is supplied. Requires more investigation. Use on your own risk.
 
 ### For technical support contact Rabarbers and be polite
 
