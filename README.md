@@ -14,7 +14,7 @@ In Pascal network, every account can send 1 free transaction per block. Other tr
 ```c#
 var sendingPascResponse = await connector.SendToAsync(senderAccount: 1141769, receiverAccount: 834853,
     amount: 1.2345M, fee: 0, payload: "Thanks for good work!", payloadMethod: PayloadMethod.None);
-if (sendingPascResponse.Error == null && sendingPascResponse.Result != null)
+if (sendingPascResponse.Result != null)
 {
     var amount = sendingPascResponse.Result.Receivers[0].Amount;
     var description = sendingPascResponse.Result.Description;
@@ -33,7 +33,7 @@ var identifier = new Guid("AAA19787-F847-4323-8987-2E652F593BCE");
 var data = "This is a free chat message on Pascal blockchain! Find out more at https://www.pascalcoin.org";
 var sendingDataResponse = await connector.SendDataAsync(senderAccount: 796500, receiverAccount: 834853, fee: 0,
     guid: identifier.ToString(), dataType: DataType.ChatMessage, payload: data);
-if (sendingDataResponse.Error == null && sendingDataResponse.Result != null)
+if (sendingDataResponse.Result != null)
 {
     var description = sendingDataResponse.Result.Description;
     Console.WriteLine($"Successfully sent important information to a friend. Operation details: {description}");
@@ -60,7 +60,7 @@ When the user2 receives the signature from the user1, the user2 can verify if th
 //user2
 var verificationResponse = await connector.VerifySignedMessageAsync(digest: message, signature: userSignature1,
     b58PublicKey: user1AccountPublicKey);
-if (verificationResponse.Result)
+if (verificationResponse.Result ?? false)
 {
     Console.WriteLine("Verification successfull");
 }
@@ -90,7 +90,7 @@ var signedMultiOpResponse = await connector.MultioperationSignOnlineAsync(multiO
 
 ///Signed MultiOperation can be executed
 var executedMultiOpResponse = await connector.ExecuteOperationsAsync(signedMultiOpResponse.Result?.RawOperations);
-if (executedMultiOpResponse.Error == null && (executedMultiOpResponse.Result?.SingleOrDefault()?.Valid ?? false))
+if (executedMultiOpResponse.Result?.SingleOrDefault()?.Valid ?? false)
 {
     Console.WriteLine("Sent 2 Pascals from 2 different accounts to a friend.");
 }
@@ -114,7 +114,7 @@ var operations = coldWalletSendingResponse.Result?.RawOperations;
 //executed online
 var coldWalletSendingExecutionResponse = await connector.ExecuteOperationsAsync(operations);
 var isValidOperation = coldWalletSendingExecutionResponse.Result?.SingleOrDefault()?.Valid ?? false;
-if (coldWalletSendingExecutionResponse.Error == null && isValidOperation)
+if (isValidOperation)
 {
     Console.WriteLine("Successfully executed Pascals sending transaction that was created in cold wallet");
 }
@@ -124,6 +124,9 @@ else
     Console.WriteLine($"Cold wallet operation failed. Error details: {errors}");
 }
 ```
+
+### Error checking
+According to [JSON RPC Specification](https://www.jsonrpc.org/specification) if the RPC method call is successfull, then the field 'Result' of the response object is not null and the 'Error' is null. If the RPC method call is not successfull, then the field 'Error' is not null and 'Result' is null. Note that some objects like RawOperations contains inner data fields with error messages and validity information.
 
 ### Pascal.Wallet.Connector supported features
 * Pascal Wallet JSON RPC API methods [(Documentation for Wallet version 3.0)](https://www.pascalcoin.org/development/rpc).  

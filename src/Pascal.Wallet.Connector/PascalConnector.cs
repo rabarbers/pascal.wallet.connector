@@ -38,9 +38,9 @@ namespace Pascal.Wallet.Connector
         /// <summary>Adds a node to connect</summary>
         /// <param name="nodes">String containing 1 or multiple IP:port separated by ";"</param>
         /// <returns>Returns an integer with nodes added</returns>
-        public Task<Response<int>> AddNodeAsync(string nodes)
+        public Task<Response<int?>> AddNodeAsync(string nodes)
         {
-            return InvokeAsync<int>("addnode", $"{{\"nodes\":\"{nodes}\"}}");
+            return InvokeAsync<int?>("addnode", $"{{\"nodes\":\"{nodes}\"}}");
         }
 
         /// <summary>Get an account information</summary>
@@ -74,7 +74,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="start">If provided, will return wallet accounts starting at this position (index starts at position 0). If not provided, start=0 by default.</param>
         /// <param name="max">If provided, will return max accounts. If not provided, max=100 by default.</param>
         /// <remarks>If use encodedPublicKey and b58PublicKey together and is not the same public key, will return an error</remarks>
-        public Task<Response<uint>> GetWalletAccountsCountAsync(string encodedPublicKey = null, string b58PublicKey = null, uint? start = null, uint? max = null)
+        public Task<Response<uint?>> GetWalletAccountsCountAsync(string encodedPublicKey = null, string b58PublicKey = null, uint? start = null, uint? max = null)
         {
             var parameters = new
             {
@@ -83,7 +83,7 @@ namespace Pascal.Wallet.Connector
                 start,
                 max
             };
-            return InvokeAsync<uint>("getwalletaccountscount", Serialize(parameters));
+            return InvokeAsync<uint?>("getwalletaccountscount", Serialize(parameters));
         }
 
         /// <summary>Get wallet public keys</summary>
@@ -115,14 +115,14 @@ namespace Pascal.Wallet.Connector
         /// <summary>Get wallet coins total balance (total or filtered by public key). If use encodedPublicKey and b58PublicKey together and is not the same public key, will return an error.</summary>
         /// <param name="encodedPublicKey">HEXASTRING (optional). If provided, return only this public key balance</param>
         /// <param name="b58PublicKey">String (optional). If provided, return only this public key balance</param>
-        public Task<Response<double>> GetWalletCoinsAsync(string encodedPublicKey = null, string b58PublicKey = null)
+        public Task<Response<double?>> GetWalletCoinsAsync(string encodedPublicKey = null, string b58PublicKey = null)
         {
             var parameters = new
             {
                 enc_pubkey = encodedPublicKey,
                 b58_pubkey = b58PublicKey
             };
-            return InvokeAsync<double>("getwalletcoins", Serialize(parameters));
+            return InvokeAsync<double?>("getwalletcoins", Serialize(parameters));
         }
 
         /// <summary>Get block information</summary>
@@ -146,9 +146,9 @@ namespace Pascal.Wallet.Connector
         }
 
         /// <summary>Get blockchain high in this node</summary>
-        public Task<Response<uint>> GetBlockCountAsync()
+        public Task<Response<uint?>> GetBlockCountAsync()
         {
-            return InvokeAsync<uint>("getblockcount");
+            return InvokeAsync<uint?>("getblockcount");
         }
 
         /// <summary>Get an operation of the block information</summary>
@@ -205,9 +205,9 @@ namespace Pascal.Wallet.Connector
         }
 
         /// <summary>Returns node pending buffer count</summary>
-        public Task<Response<uint>> GetPendingsCountAsync()
+        public Task<Response<uint?>> GetPendingsCountAsync()
         {
-            return InvokeAsync<uint>("getpendingscount");
+            return InvokeAsync<uint?>("getpendingscount");
         }
 
         /// <summary>Finds an operation by "ophash"</summary>
@@ -870,37 +870,37 @@ namespace Pascal.Wallet.Connector
 
         /// <summary>Locks the Wallet if it has a password, otherwise wallet cannot be locked</summary>
         /// <returns>Returns a Boolean indicating if Wallet is locked. If false that means that Wallet has an empty password and cannot be locked</returns>
-        public Task<Response<bool>> LockAsync()
+        public Task<Response<bool?>> LockAsync()
         {
-            return InvokeAsync<bool>("lock");
+            return InvokeAsync<bool?>("lock");
         }
 
         /// <summary>Unlocks a locked Wallet using "pwd" param</summary>
         /// <param name="pwd">Password</param>
         /// <returns>Returns a Boolean indicating if Wallet is unlocked after using pwd password</returns>
-        public Task<Response<bool>> UnlockAsync(string pwd)
+        public Task<Response<bool?>> UnlockAsync(string pwd)
         {
-            return InvokeAsync<bool>("unlock", $"{{\"pwd\":\"{pwd}\"}}");
+            return InvokeAsync<bool?>("unlock", $"{{\"pwd\":\"{pwd}\"}}");
         }
 
         /// <summary>Finds an operation by "ophash"</summary>
         /// <param name="pwd">New password</param>
         /// <returns>Returns a Boolean if Wallet password changed with new pwd password</returns>
-        public Task<Response<bool>> SetWalletPasswordAsync(string pwd)
+        public Task<Response<bool?>> SetWalletPasswordAsync(string pwd)
         {
-            return InvokeAsync<bool>("setwalletpassword", $"{{\"pwd\":\"{pwd}\"}}");
+            return InvokeAsync<bool?>("setwalletpassword", $"{{\"pwd\":\"{pwd}\"}}");
         }
 
         /// <summary>Stops the node and the server. Closes all connections</summary>
-        public Task<Response<bool>> StopNodeAsync()
+        public Task<Response<bool?>> StopNodeAsync()
         {
-            return InvokeAsync<bool>("stopnode");
+            return InvokeAsync<bool?>("stopnode");
         }
 
         /// <summary>Starts the node and the server. Starts connection process</summary>
-        public Task<Response<bool>> StartNodeAsync()
+        public Task<Response<bool?>> StartNodeAsync()
         {
-            return InvokeAsync<bool>("startnode");
+            return InvokeAsync<bool?>("startnode");
         }
 
         /// <summary>Signs a digest message using a public key</summary>
@@ -925,7 +925,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="encodedPublicKey">Public key in Encoded format</param>
         /// <param name="b58PublicKey">Public key in Base 58 format (the same that Application Wallet exports)</param>
         /// <returns>True if verification is successfull, false - if verification fails.</returns>
-        public async Task<Response<bool>> VerifySignedMessageAsync(string digest, string signature, string encodedPublicKey = null, string b58PublicKey = null)
+        public async Task<Response<bool?>> VerifySignedMessageAsync(string digest, string signature, string encodedPublicKey = null, string b58PublicKey = null)
         {
             var encodedDigest = digest?.ToHexString();
             var parameters = new
@@ -943,15 +943,15 @@ namespace Pascal.Wallet.Connector
             if (encodedPublicKey == null && b58PublicKey != null)
             {
                 var decodedPublicKeyResponse = await DecodePublicKeyAsync(b58PublicKey: b58PublicKey);
-                if (decodedPublicKeyResponse.Error != null || decodedPublicKeyResponse.Result == null)
+                if (decodedPublicKeyResponse.Error != null)
                 {
-                    return new Response<bool>() { Id = decodedPublicKeyResponse.Id, Error = decodedPublicKeyResponse.Error, JsonRpc = decodedPublicKeyResponse.JsonRpc, Result = false };
+                    return new Response<bool?>() { Id = decodedPublicKeyResponse.Id, Error = decodedPublicKeyResponse.Error, JsonRpc = decodedPublicKeyResponse.JsonRpc, Result = null };
                 }
                 encodedKey = decodedPublicKeyResponse.Result.EncodedPublicKey;
             }
 
-            var isSigned = response.Error == null && response.Result != null && response.Result.Signature == signature && response.Result.DigestHexString == encodedDigest && response.Result.EncodedPublicKey == encodedKey;
-            return new Response<bool>() { Id = response.Id, Error = response.Error, JsonRpc = response.JsonRpc, Result = isSigned };
+            var isSigned = response.Result != null && response.Result.Signature == signature && response.Result.DigestHexString == encodedDigest && response.Result.EncodedPublicKey == encodedKey;
+            return new Response<bool?>() { Id = response.Id, Error = response.Error, JsonRpc = response.JsonRpc, Result = isSigned };
         }
 
         /// <summary>Adds operations to a multioperation(or creates a new multioperation and adds new operations)</summary>

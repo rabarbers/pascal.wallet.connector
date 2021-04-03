@@ -144,7 +144,7 @@ namespace Pascal.Wallet.Connector.Tests
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
             var response = await connector.GetWalletAccountsCountAsync();
             Assert.Null(response.Error);
-            Assert.Equal<uint>(3, response.Result);
+            Assert.Equal<uint?>(3, response.Result);
         }
         [Fact]
         public async Task GetWalletAccountsCountUsingEncodedKeyAsync()
@@ -161,7 +161,7 @@ namespace Pascal.Wallet.Connector.Tests
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
             var response = await connector.GetWalletAccountsCountAsync(encodedPublicKey: "CA022000662084946291B2620108EBD6A0653B742E3673529751FF6BB565D9F47D920ADA200005CDF25090FFFA9A72181D13E457C7CF061CCAF4D4618EBCF9EA1D124E39EDCB");
             Assert.Null(response.Error);
-            Assert.Equal<uint>(2, response.Result);
+            Assert.Equal<uint?>(2, response.Result);
         }
         [Fact]
         public async Task GetWalletAccountsCountUsingB58KeyAsync()
@@ -178,7 +178,7 @@ namespace Pascal.Wallet.Connector.Tests
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
             var response = await connector.GetWalletAccountsCountAsync(b58PublicKey: "3Ghhbop8Mfdp8P7Ltuwu8nVpNXMAcEc8KSVWQ7ZgyHjYeHpBg8ezuKi1DJw5EoZYKhwbXqFLgb4YnfzJT3yQTupfVorNrtWdpqVEp8");
             Assert.Null(response.Error);
-            Assert.Equal<uint>(2, response.Result);
+            Assert.Equal<uint?>(2, response.Result);
         }
 
         [Fact]
@@ -475,7 +475,7 @@ namespace Pascal.Wallet.Connector.Tests
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
             var response = await connector.GetBlockCountAsync();
             Assert.Null(response.Error);
-            Assert.Equal<uint>(9922, response.Result);
+            Assert.Equal<uint?>(9922, response.Result);
         }
 
         [Fact]
@@ -790,7 +790,7 @@ namespace Pascal.Wallet.Connector.Tests
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
             var response = await connector.GetPendingsCountAsync();
             Assert.Null(response.Error);
-            Assert.Equal<uint>(2, response.Result);
+            Assert.Equal<uint?>(2, response.Result);
         }
 
         [Fact]
