@@ -146,7 +146,7 @@ Note that some objects like RawOperations contains inner data fields with error 
 ### For technical support contact Rabarbers and be polite
 
 ## Roadmap
-* RPC EPasa methods: 'checkepasa' and 'validateepasa' and Epasa data structure according to [Wallet v5.4 CHANGELOG](https://github.com/PascalCoin/PascalCoin/blob/master/CHANGELOG.md) and [PIP-0027](https://www.pascalcoin.org/development/pips/pip-0027).  
+* RPC EPasa methods: 'checkepasa' and 'validateepasa' according to [Wallet v5.4 CHANGELOG](https://github.com/PascalCoin/PascalCoin/blob/master/CHANGELOG.md) and [PIP-0027](https://www.pascalcoin.org/development/pips/pip-0027).  
 * Update RPC method signatures taking into consideration all the changes documented in [Wallet v5.4 CHANGELOG](https://github.com/PascalCoin/PascalCoin/blob/master/CHANGELOG.md).  
 * RPC method 'paytokey' when it will be supported in the Wallet according to [PIP-0041](https://www.pascalcoin.org/development/pips/pip-0041).  
 
