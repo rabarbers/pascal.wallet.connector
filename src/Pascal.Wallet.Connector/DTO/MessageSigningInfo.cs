@@ -13,11 +13,11 @@ namespace Pascal.Wallet.Connector.DTO
     {
         /// <summary>HEXASTRING with the message to sign</summary>
         [JsonPropertyName("digest")]
-        public string DigestHexaString { get; set; }
+        public string DigestHexString { get; set; }
 
         public string Digest
         {
-            get => DigestHexaString.FromHexastring();
+            get => DigestHexString?.FromHexString();
         }
 
         /// <summary>HESATRING with the public key that used to sign "digest" data</summary>

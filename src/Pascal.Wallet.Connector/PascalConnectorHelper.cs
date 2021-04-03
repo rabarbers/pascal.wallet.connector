@@ -29,12 +29,12 @@ namespace Pascal.Wallet.Connector
             return builder.ToString();
         }
 
-        public static string ToHexastring(this string originalString)
+        public static string ToHexString(this string originalString)
         {
             return !string.IsNullOrEmpty(originalString) ? Convert.ToHexString(Encoding.UTF8.GetBytes(originalString)) : originalString;
         }
 
-        public static string FromHexastring(this string hexaString)
+        public static string FromHexString(this string hexaString)
         {
             return Encoding.UTF8.GetString(Convert.FromHexString(hexaString));
         }

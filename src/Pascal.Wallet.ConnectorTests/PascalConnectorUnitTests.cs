@@ -2470,7 +2470,7 @@ namespace Pascal.Wallet.Connector.Tests
             var response = await connector.SignMessageAsync(digest: "Message", b58PublicKey: "3Ghhbop8Mfdp8P7Ltuwu8nVpNXMAcEc8KSVWQ7ZgyHjYeHpBg8ezuKi1DJw5EoZYKhwbXqFLgb4YnfzJT3yQTupfVorNrtWdpqVEp8");
 
             Assert.Null(response.Error);
-            Assert.Equal("4D657373616765", response.Result.DigestHexaString);
+            Assert.Equal("4D657373616765", response.Result.DigestHexString);
             Assert.Equal("CA022000662084946291B2620108EBD6A0653B742E3673529751FF6BB565D9F47D920ADA200005CDF25090FFFA9A72181D13E457C7CF061CCAF4D4618EBCF9EA1D124E39EDCB", response.Result.EncodedPublicKey);
             Assert.Equal("2000A7E8DBC16710D79155CC0F8DD91F94446E18B066D0E0BFF984C43EC83FC69BB520006293C2D4CBC924D23BD14AEE287E8DB6C29A824150D5A047A9CD9D229758F439", response.Result.Signature);
         }
@@ -2708,6 +2708,67 @@ namespace Pascal.Wallet.Connector.Tests
             Assert.Equal("00000000", result.RawOperations);
         }
 
-        
+        [Fact]
+        public async Task CheckEPasaAsync()
+        {
+            var handlerMock = new Mock<HttpMessageHandler>();
+            handlerMock.Protected()
+               .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+               .ReturnsAsync(new HttpResponseMessage()
+               {
+                   StatusCode = HttpStatusCode.OK,
+                   Content = new StringContent("{\"account_epasa\":\"834853-50[\\\"Hello friend!\\\"]:6941\",\"account_epasa_classic\":\"834853-50[\\\"Hello friend!\\\"]\",\"account\":834853,\"payload_method\":\"none\",\"payload_encode\":\"string\",\"payload\":\"48656C6C6F20667269656E6421\",\"payload_type\":17,\"is_pay_to_key\":false,\"id\":1,\"jsonrpc\":\"2.0\"}")
+               });
+
+            using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
+
+            var ePasaString = "834853-50[\\\"Hello friend!\\\"]";
+            var response = await connector.CheckEPasaAsync(ePasaString);
+
+            Assert.Null(response.Error);
+
+            var result = response.Result;
+
+            Assert.Equal("834853-50[\"Hello friend!\"]:6941", result.AccountEPasa);
+            Assert.Equal("834853-50[\"Hello friend!\"]", result.AccountEPasaClassic);
+            Assert.Equal<uint>(834853, result.AccountNumber);
+            Assert.Equal(PayloadMethod.None, result.PayloadMethod);
+            Assert.Equal(PayloadEncode.String, result.PayloadEncode);
+            Assert.Equal("48656C6C6F20667269656E6421", result.PayloadHexString);
+            Assert.Equal("Hello friend!", result.Payload);
+            Assert.Equal(PayloadType.Public | PayloadType.AsciiFormatted, result.PayloadType);
+            Assert.False(result.IsPayToKey);
+        }
+
+        [Fact]
+        public async Task ValidateEPasaAsync()
+        {
+            var handlerMock = new Mock<HttpMessageHandler>();
+            handlerMock.Protected()
+               .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+               .ReturnsAsync(new HttpResponseMessage()
+               {
+                   StatusCode = HttpStatusCode.OK,
+                   Content = new StringContent("{\"account_epasa\":\"834853-50[\\\"Test\\\"]:7d72\",\"account_epasa_classic\":\"834853-50[\\\"Test\\\"]\",\"account\":834853,\"payload_method\":\"none\",\"payload_encode\":\"string\",\"payload\":\"54657374\",\"payload_type\":17,\"is_pay_to_key\":false,\"id\":100,\"jsonrpc\":\"2.0\",\"error\":{\"code\":null}}")
+               });
+
+            using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
+
+            var response = await connector.ValidateEPasaAsync(account: "834853", payload: "Test");
+
+            Assert.Null(response.Error);
+
+            var result = response.Result;
+
+            Assert.Equal("834853-50[\"Hello friend!\"]:6941", result.AccountEPasa);
+            Assert.Equal("834853-50[\"Hello friend!\"]", result.AccountEPasaClassic);
+            Assert.Equal<uint>(834853, result.AccountNumber);
+            Assert.Equal(PayloadMethod.None, result.PayloadMethod);
+            Assert.Equal(PayloadEncode.String, result.PayloadEncode);
+            Assert.Equal("48656C6C6F20667269656E6421", result.PayloadHexString);
+            Assert.Equal("Hello friend!", result.Payload);
+            Assert.Equal(PayloadType.Public | PayloadType.AsciiFormatted, result.PayloadType);
+            Assert.False(result.IsPayToKey);
+        }
     }
 }

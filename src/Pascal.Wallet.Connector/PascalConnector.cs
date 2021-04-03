@@ -261,7 +261,7 @@ namespace Pascal.Wallet.Connector
                 target = receiverAccount,
                 amount,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -293,7 +293,7 @@ namespace Pascal.Wallet.Connector
                 data_sequence = dataSequence,
                 amount,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -340,7 +340,7 @@ namespace Pascal.Wallet.Connector
                 new_enc_pubkey = newEncodedPublicKey,
                 new_b58_pubkey = newB58PublicKey,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -364,7 +364,7 @@ namespace Pascal.Wallet.Connector
                 new_enc_pubkey = newEncodedPublicKey,
                 new_b58_pubkey = newB58PublicKey,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -397,7 +397,7 @@ namespace Pascal.Wallet.Connector
                 new_enc_pubkey = newEncodedPublicKey,
                 new_b58_pubkey = newB58PublicKey,
                 locked_until_block = lockedUntilBlock,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -420,7 +420,7 @@ namespace Pascal.Wallet.Connector
                 account_target = accountNumber,
                 account_signer = signerAccount,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -453,7 +453,7 @@ namespace Pascal.Wallet.Connector
                 new_b58_pubkey = newB58PublicKey,
                 amount,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -484,7 +484,7 @@ namespace Pascal.Wallet.Connector
                 new_name = newName,
                 new_type = newType,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -522,7 +522,7 @@ namespace Pascal.Wallet.Connector
                 last_n_operation = lastNOperation,
                 amount,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -572,7 +572,7 @@ namespace Pascal.Wallet.Connector
                 target_b58_pubkey = receiverB58PublicKey,
                 sender_enc_pubkey = senderEncodedPublicKey,
                 sender_b58_pubkey = senderB58PublicKey,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -606,7 +606,7 @@ namespace Pascal.Wallet.Connector
                 rawoperations = rawOperations,
                 last_n_operation = lastNOperation,
                 fee,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -648,7 +648,7 @@ namespace Pascal.Wallet.Connector
                 rawoperations = rawOperations,
                 signer_enc_pubkey = signerEncodedPublicKey,
                 signer_b58_pubkey = signerB58PublicKey,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -679,7 +679,7 @@ namespace Pascal.Wallet.Connector
                 rawoperations = rawOperations,
                 signer_enc_pubkey = signerEncodedPublicKey,
                 signer_b58_pubkey = signerB58PublicKey,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -721,7 +721,7 @@ namespace Pascal.Wallet.Connector
                 rawoperations = rawOperations,
                 signer_enc_pubkey = signerEncodedPublicKey,
                 signer_b58_pubkey = signerB58PublicKey,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -761,7 +761,7 @@ namespace Pascal.Wallet.Connector
                 rawoperations = rawOperations,
                 signer_enc_pubkey = signerEncodedPublicKey,
                 signer_b58_pubkey = signerB58PublicKey,
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = payloadMethod?.ToString().ToLower(),
                 pwd = password
             };
@@ -828,7 +828,7 @@ namespace Pascal.Wallet.Connector
         {
             var parameters = new
             {
-                payload = payload?.ToHexastring(),
+                payload = payload?.ToHexString(),
                 payload_method = method.ToString().ToLower(),
                 enc_pubkey = encodedPublicKey,
                 b58_pubkey = b58PublicKey,
@@ -912,7 +912,7 @@ namespace Pascal.Wallet.Connector
         {
             var parameters = new
             {
-                digest = digest?.ToHexastring(),
+                digest = digest?.ToHexString(),
                 enc_pubkey = encodedPublicKey,
                 b58_pubkey = b58PublicKey
             };
@@ -927,7 +927,7 @@ namespace Pascal.Wallet.Connector
         /// <returns>True if verification is successfull, false - if verification fails.</returns>
         public async Task<Response<bool>> VerifySignedMessageAsync(string digest, string signature, string encodedPublicKey = null, string b58PublicKey = null)
         {
-            var encodedDigest = digest?.ToHexastring();
+            var encodedDigest = digest?.ToHexString();
             var parameters = new
             {
                 digest = encodedDigest,
@@ -950,7 +950,7 @@ namespace Pascal.Wallet.Connector
                 encodedKey = decodedPublicKeyResponse.Result.EncodedPublicKey;
             }
 
-            var isSigned = response.Error == null && response.Result != null && response.Result.Signature == signature && response.Result.DigestHexaString == encodedDigest && response.Result.EncodedPublicKey == encodedKey;
+            var isSigned = response.Error == null && response.Result != null && response.Result.Signature == signature && response.Result.DigestHexString == encodedDigest && response.Result.EncodedPublicKey == encodedKey;
             return new Response<bool>() { Id = response.Id, Error = response.Error, JsonRpc = response.JsonRpc, Result = isSigned };
         }
 
@@ -1006,6 +1006,34 @@ namespace Pascal.Wallet.Connector
             return InvokeAsync<RawOperation>("operationsdelete", $"{{\"rawoperations\":\"{rawoperations}\",\"index\":{index}}}");
         }
 
+        /// <summary>Created EPasa object from valid ePasa string</summary>
+        /// <param name="ePasa">EPasa string</param>
+        /// <returns>Returns a EPasa object</returns>
+        public Task<Response<EPasa>> CheckEPasaAsync(string ePasa)
+        {
+            return InvokeAsync<EPasa>("checkepasa", $"{{\"account_epasa\":\"{ePasa}\"}}");
+        }
+
+        /// <summary>Created EPasa object from valid ePasa string</summary>
+        /// <param name="account">Valid number or account name(Use @ for a PayToKey)</param>
+        /// <param name="payloadMethod"></param>
+        /// <param name="payload">HEXASTRING with the payload data</param>
+        /// <param name="password">Will be used if PayloadMethod = Aes</param>
+        /// <param name="encodingType"></param>
+        /// <returns>Returns a EPasa object</returns>
+        public Task<Response<EPasa>> ValidateEPasaAsync(string account, string payload, PayloadEncode? encodingType = PayloadEncode.String, PayloadMethod payloadMethod = PayloadMethod.None, string password = null)
+        {
+            var parameters = new
+            {
+                account,
+                payload_method = payloadMethod.ToString().ToLower(),
+                pwd = password,
+                payload_encode = encodingType.ToString().ToLower(),
+                payload = payload?.ToHexString()
+            };
+            return InvokeAsync<EPasa>("validateepasa", Serialize(parameters));
+        }
+
         private static string Serialize<T>(T parametersObject)
         {
             var options = new JsonSerializerOptions()
@@ -1032,7 +1060,7 @@ namespace Pascal.Wallet.Connector
             try
             {
                 var response = await _httpClient.PostAsync(_url, content);
-                //var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
+                var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
                 var responseContentStream = await response.Content.ReadAsStreamAsync();
                 var deserializeOptions = new JsonSerializerOptions()
                 {

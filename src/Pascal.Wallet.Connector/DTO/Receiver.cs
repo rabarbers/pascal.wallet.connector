@@ -38,7 +38,7 @@ namespace Pascal.Wallet.Connector.DTO
         {
             AccountNumber = accountNumber;
             Amount = amount;
-            Payload = payload.ToHexastring();
+            Payload = payload.ToHexString();
             PayloadType = payloadType;
         }
     }
