@@ -66,7 +66,7 @@ if (verificationResponse.Result ?? false)
 }
 else
 {
-    Console.WriteLine($"Verification failed, error details: {verificationResponse.Error?.Message}");
+    Console.WriteLine($"Verification failed, error details: {verificationResponse.Error.Message}");
 }
 ```
 
