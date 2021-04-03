@@ -126,9 +126,9 @@ else
 ```
 
 ### Pascal.Wallet.Connector supported features
-Pascal Wallet JSON RPC API methods [(Documentation for Wallet version 3.0)](https://www.pascalcoin.org/development/rpc).  
-Updated data structures (Wallet version 5.4.)  
-DataOperation methods: SendDataAsync, SignDataAsync, FindDataOperationsAsync. More details in [PIP-0033](https://www.pascalcoin.org/development/pips/pip-0033).  
+* Pascal Wallet JSON RPC API methods [(Documentation for Wallet version 3.0)](https://www.pascalcoin.org/development/rpc).  
+* Updated data structures (Wallet version 5.4.)  
+* DataOperation methods: SendDataAsync, SignDataAsync, FindDataOperationsAsync. More details in [PIP-0033](https://www.pascalcoin.org/development/pips/pip-0033).  
 
 ### Known issues
 * Cold wallet operation SendToAsync does not recognize accounts in MainNet.  
