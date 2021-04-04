@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Pascal.Wallet.Connector</RootNamespace>
+    <Authors>Pascal.Wallet.Connector Contributors</Authors>
+    <Company></Company>
+    <PackageTags>Pascal, PascalCoin, Coin, Pascal.Wallet, Pascal.Wallet.Connector</PackageTags>
+    <Description>.NET5 library to call Pascal full node Wallet JSON RPC API methods</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/rabarbers/pascal.wallet.connector</RepositoryUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageReleaseNotes>Supports all Pascal Wallet RPC API methods available in Pascal Wallet version 3.0 with updated data structures supporting Pascal Wallet version 5.4. Includes RPC methods for DataOperations.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
