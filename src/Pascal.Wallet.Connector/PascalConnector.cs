@@ -1068,7 +1068,7 @@ namespace Pascal.Wallet.Connector
             try
             {
                 var response = await _httpClient.PostAsync(_url, content);
-                var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
+                //var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
                 var responseContentStream = await response.Content.ReadAsStreamAsync();
                 var deserializeOptions = new JsonSerializerOptions()
                 {
