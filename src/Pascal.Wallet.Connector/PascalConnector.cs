@@ -950,8 +950,16 @@ namespace Pascal.Wallet.Connector
                 encodedKey = decodedPublicKeyResponse.Result.EncodedPublicKey;
             }
 
-            var isSigned = response.Result != null && response.Result.Signature == signature && response.Result.DigestHexString == encodedDigest && response.Result.EncodedPublicKey == encodedKey;
-            return new Response<bool?>() { Id = response.Id, Error = response.Error, JsonRpc = response.JsonRpc, Result = isSigned };
+            bool? result;
+            if (response.Result != null)
+            {
+                result = response.Result.Signature == signature && response.Result.DigestHexString == encodedDigest && response.Result.EncodedPublicKey == encodedKey;
+            }
+            else
+            {
+                result = null; //According to JSON RPC specification, only one field should be null - Error or Result.
+            }
+            return new Response<bool?>() { Id = response.Id, Error = response.Error, JsonRpc = response.JsonRpc, Result = result };
         }
 
         /// <summary>Adds operations to a multioperation(or creates a new multioperation and adds new operations)</summary>
