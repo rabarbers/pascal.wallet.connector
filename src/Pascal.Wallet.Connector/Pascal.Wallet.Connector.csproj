@@ -10,7 +10,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/rabarbers/pascal.wallet.connector</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
-    <PackageReleaseNotes>Supports all Pascal Wallet RPC API methods available in Pascal Wallet version 3.0 with updated data structures supporting Pascal Wallet version 5.4. Includes RPC methods for DataOperations.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added AccountState Coin_Swap and Account_Swap.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

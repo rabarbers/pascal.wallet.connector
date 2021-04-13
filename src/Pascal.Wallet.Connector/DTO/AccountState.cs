@@ -13,6 +13,10 @@ namespace Pascal.Wallet.Connector.DTO
 		/// <summary>Normal account - not listed for sale</summary>
 		Normal,
 		/// <summary>Listed for sale</summary>
-		Listed
+		Listed,
+		/// <summary></summary>
+		Coin_Swap,
+		/// <summary></summary>
+		Account_Swap
 	}
 }
