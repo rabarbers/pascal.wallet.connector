@@ -71,12 +71,11 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("type")]
         public uint Type { get; set; }
 
-        //TODO: find explanation
-        /// <summary>HEXASTRING: Hexadecimal value 0..32 bytes</summary>
+        /// <summary>Array of Byte - max 32 bytes data set by account owner (PIP-0024)</summary>
         [JsonPropertyName("data")]
         public string Data { get; set; }
 
-        //TODO: find explanation
+        /// <summary>Hex encoded cryptographically secure account history (PIP-0029)</summary>
         [JsonPropertyName("seal")]
         public string Seal { get; set; }
     }

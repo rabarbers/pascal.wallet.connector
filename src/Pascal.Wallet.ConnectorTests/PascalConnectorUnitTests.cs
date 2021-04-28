@@ -2717,7 +2717,7 @@ namespace Pascal.Wallet.Connector.Tests
                .ReturnsAsync(new HttpResponseMessage()
                {
                    StatusCode = HttpStatusCode.OK,
-                   Content = new StringContent("{\"account_epasa\":\"834853-50[\\\"Hello friend!\\\"]:6941\",\"account_epasa_classic\":\"834853-50[\\\"Hello friend!\\\"]\",\"account\":834853,\"payload_method\":\"none\",\"payload_encode\":\"string\",\"payload\":\"48656C6C6F20667269656E6421\",\"payload_type\":17,\"is_pay_to_key\":false,\"id\":1,\"jsonrpc\":\"2.0\"}")
+                   Content = new StringContent("{\"result\":{\"account_epasa\":\"834853-50[\\\"Hello friend!\\\"]:6941\",\"account_epasa_classic\":\"834853-50[\\\"Hello friend!\\\"]\",\"account\":834853,\"payload_method\":\"none\",\"payload_encode\":\"string\",\"payload\":\"48656C6C6F20667269656E6421\",\"payload_type\":17,\"is_pay_to_key\":false},\"id\":1,\"jsonrpc\":\"2.0\"}")
                });
 
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
@@ -2749,7 +2749,7 @@ namespace Pascal.Wallet.Connector.Tests
                .ReturnsAsync(new HttpResponseMessage()
                {
                    StatusCode = HttpStatusCode.OK,
-                   Content = new StringContent("{\"account_epasa\":\"834853-50[\\\"Test\\\"]:7d72\",\"account_epasa_classic\":\"834853-50[\\\"Test\\\"]\",\"account\":834853,\"payload_method\":\"none\",\"payload_encode\":\"string\",\"payload\":\"54657374\",\"payload_type\":17,\"is_pay_to_key\":false,\"id\":100,\"jsonrpc\":\"2.0\",\"error\":{\"code\":null}}")
+                   Content = new StringContent("{\"result\":{\"account_epasa\":\"834853-50[\\\"Test\\\"]:7d72\",\"account_epasa_classic\":\"834853-50[\\\"Test\\\"]\",\"account\":834853,\"payload_method\":\"none\",\"payload_encode\":\"string\",\"payload\":\"54657374\",\"payload_type\":17,\"is_pay_to_key\":false},\"id\":1,\"jsonrpc\":\"2.0\"}")
                });
 
             using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
@@ -2760,13 +2760,13 @@ namespace Pascal.Wallet.Connector.Tests
 
             var result = response.Result;
 
-            Assert.Equal("834853-50[\"Hello friend!\"]:6941", result.AccountEPasa);
-            Assert.Equal("834853-50[\"Hello friend!\"]", result.AccountEPasaClassic);
+            Assert.Equal("834853-50[\"Test\"]:7d72", result.AccountEPasa);
+            Assert.Equal("834853-50[\"Test\"]", result.AccountEPasaClassic);
             Assert.Equal<uint>(834853, result.AccountNumber);
             Assert.Equal(PayloadMethod.None, result.PayloadMethod);
             Assert.Equal(PayloadEncode.String, result.PayloadEncode);
-            Assert.Equal("48656C6C6F20667269656E6421", result.PayloadHexString);
-            Assert.Equal("Hello friend!", result.Payload);
+            Assert.Equal("54657374", result.PayloadHexString);
+            Assert.Equal("Test", result.Payload);
             Assert.Equal(PayloadType.Public | PayloadType.AsciiFormatted, result.PayloadType);
             Assert.False(result.IsPayToKey);
         }
