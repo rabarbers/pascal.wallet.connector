@@ -507,7 +507,7 @@ namespace Pascal.Wallet.Connector
         /// <param name="password">Used to encrypt payload with aes as a payloadMethod. If none equals to empty password.</param>
         /// <remarks>Wallet must be unlocked and sender private key(searched with provided public key) must be in wallet. No other checks are made(no checks for valid target, valid n_operation, valid amount or fee ...)</remarks>
         /// <returns>Returns a Raw Operations Object</returns>
-        public Task<Response<RawOperation>> SignSendToAsync(uint senderAccount, uint receiverAccount, uint amount, uint lastNOperation, decimal fee = 0, string senderEncodedPublicKey = null, string senderB58PublicKey = null,
+        public Task<Response<RawOperation>> SignSendToAsync(uint senderAccount, uint receiverAccount, decimal amount, uint lastNOperation, decimal fee = 0, string senderEncodedPublicKey = null, string senderB58PublicKey = null,
             string targetEncodedPublicKey = null, string targetB58PublicKey = null, string rawOperations = null, string payload = null, PayloadMethod? payloadMethod = null, string password = null)
         {
             var parameters = new
