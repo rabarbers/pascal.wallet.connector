@@ -246,6 +246,31 @@ namespace Pascal.Wallet.Connector
             return InvokeAsync<Account[]>("findaccounts", Serialize(parameters));
         }
 
+        //TODO: find out how to use parameters encodedPublicKey, b58PublicKey, payload, payloadSearchType
+        /// <summary>Will search and return an array of "Block objects"</summary>
+        /// <param name="start">Start block number(by default, 0)</param>
+        /// <param name="end">End block number</param>
+        /// <param name="max">Max of accounts returned in array(by default, 100)</param>
+        /// <param name="encodedPublicKey">HEXASTRING - Will return blocks with this public key.</param>
+        /// <param name="b58PublicKey">String - Will return blocks with this public key.</param>
+        /// <param name="payload"></param>
+        /// <param name="payloadSearchType"></param>
+        /// <returns>Array of Block objects</returns>
+        public Task<Response<Block[]>> FindBlocksAsync(uint? start = null, uint? end = null, uint? max = null, string encodedPublicKey = null, string b58PublicKey = null, string payload = null, string payloadSearchType = null)
+        {
+            var parameters = new
+            {
+                start,
+                end,
+                max,
+                enc_pubkey = encodedPublicKey,
+                b58_pubkey = b58PublicKey,
+                payload,
+                payloadsearchtype = payloadSearchType
+            };
+            return InvokeAsync<Block[]>("findblocks", Serialize(parameters));
+        }
+
         /// <summary>Executes a transaction operation from "senderAccount" to "receiverAccount"</summary>
         /// <param name="senderAccount">Sender account</param>
         /// <param name="receiverAccount">Destination account</param>
@@ -1070,7 +1095,7 @@ namespace Pascal.Wallet.Connector
             try
             {
                 var response = await _httpClient.PostAsync(_url, content);
-                //var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
+                var forDebuggingPurposes = await response.Content.ReadAsStringAsync();
                 var responseContentStream = await response.Content.ReadAsStreamAsync();
                 var deserializeOptions = new JsonSerializerOptions()
                 {

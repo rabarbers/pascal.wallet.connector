@@ -10,7 +10,7 @@ namespace Pascal.Wallet.Connector.DTO
 {
     /// <summary>The PayloadType describes the encryption and encoding of the Payload</summary>
     [Flags]
-    public enum PayloadType: byte
+    public enum PayloadType
     {
         /// <summary>Payload encryption and encoding method not specified</summary>
         NonDeterministic = 0,

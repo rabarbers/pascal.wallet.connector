@@ -861,6 +861,24 @@ namespace Pascal.Wallet.Connector.Tests
         }
 
         [Fact]
+        public async Task FindBlocksAsync()
+        {
+            var handlerMock = new Mock<HttpMessageHandler>();
+            handlerMock.Protected()
+               .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+               .ReturnsAsync(new HttpResponseMessage()
+               {
+                   StatusCode = HttpStatusCode.OK,
+                   Content = new StringContent("{\"result\":[{\"block\":532000,\"enc_pubkey\":\"CA0220002627AB9C5AA048EE325D7E958E96CEE65838A82311C3AEE968B4ADA9F9DBC68A20001959C173056919CF829D34A83BCA12FF118D551AA3304360D64F037ECCA8695C\",\"reward\":25.0000,\"reward_s\":\"25.0000\",\"fee\":0.0000,\"fee_s\":\"0.0000\",\"ver\":5,\"ver_a\":5,\"timestamp\":1620843073,\"target\":596941968,\"nonce\":3221871379,\"payload\":\"internet server-----------11851021\",\"sbh\":\"4549CC09B3964F1A33ADBD0016E1FB133534584C6AD3329C5ED825A4B1BB330A\",\"oph\":\"E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855\",\"pow\":\"000000001534DA3FCC725040D1D0DCD8B5615A6CD0131D22822278DCC29CE8C1\",\"hashratekhs\":178840,\"maturation\":2336,\"operations\":0}],\"id\":1,\"jsonrpc\":\"2.0\"}")
+               });
+
+            using var connector = new PascalConnector(new Uri("http://127.0.0.1:4003"), new HttpClient(handlerMock.Object));
+            var response = await connector.FindBlocksAsync(start: 532000, max: 1);
+            Assert.Null(response.Error);
+            Assert.Single(response.Result);
+        }
+
+        [Fact]
         public async Task SendToWithoutPayloadAsync()
         {
             var handlerMock = new Mock<HttpMessageHandler>();

@@ -17,12 +17,12 @@ namespace Pascal.Wallet.Connector.Demo
             using var connector = new PascalConnector(address: "127.0.0.1", port: 4003);
 
             //Send Pascals from one account to another account
-            var sendingPascResponse = await connector.FindAccountsAsync(start: 0, end: 15);
+            var sendingPascResponse = await connector.FindBlocksAsync(start: 532000, max: 1);
             if (sendingPascResponse.Result != null)
             {
                 foreach(var account in sendingPascResponse.Result)
                 {
-                    Console.WriteLine(account.AccountNumber);
+                    Console.WriteLine(account.BlockNumber);
                 }
             }
             else
