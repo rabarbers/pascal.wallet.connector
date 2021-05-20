@@ -30,11 +30,11 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("updated_b")]
         public uint LastUpdatedBlock { get; set; }
 
-        //TODO: find explanation
+        /// <summary>Last block that updated this account with an active transaction</summary>
         [JsonPropertyName("updated_b_active_mode")]
         public uint UpdatedBlockActiveMode { get; set; }
 
-        //TODO: find explanation
+        /// <summary>Last block that updated this account witah a passive transaction</summary>
         [JsonPropertyName("updated_b_passive_mode")]
         public uint UpdatedBlockPassiveMode { get; set; }
 

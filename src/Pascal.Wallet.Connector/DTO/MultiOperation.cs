@@ -63,7 +63,5 @@ namespace Pascal.Wallet.Connector.DTO
         /// <summary>True if everybody signed.Does not check if MultiOperation is well formed or can be added to Network because is an offline call</summary>
         [JsonPropertyName("signed_can_execute")]
         public bool CanExecute { get; set; }
-
-        
     }
 }

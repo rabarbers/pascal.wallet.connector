@@ -6,7 +6,7 @@
 namespace Pascal.Wallet.Connector.DTO
 {
     /// <summary>Type of key used for public/private key encryption.</summary>
-    public enum EncryptionType
+    public enum EncryptionType: ushort
     {
         Secp256k1 = 714,
         Secp384r1 = 715,

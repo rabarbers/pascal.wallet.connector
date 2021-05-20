@@ -69,7 +69,7 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("unenc_hexpayload")]
         public string UnencryptedPayloadHexastring { get; set; }
 
-        /// <summary></summary>
+        /// <summary>Data object - additional information used only in DataOperations</summary>
         [JsonPropertyName("data")]
         public Data Data { get; set; }
     }

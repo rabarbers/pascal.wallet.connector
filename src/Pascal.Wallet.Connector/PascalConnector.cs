@@ -221,19 +221,21 @@ namespace Pascal.Wallet.Connector
         /// <param name="name">If has value, will return the account that match name</param>
         /// <param name="type">If has value, will return accounts with same type</param>
         /// <param name="start">Start account(by default, 0) - NOTE: Is the "start account number", when executing multiple calls you must set start value to the latest returned account number + 1 (Except if searching by public key, see below)</param>
+        /// <param name="end">Will search from "start" to "end" (if "end" parameter is not set, then will search to the end)</param>
         /// <param name="max">Max of accounts returned in array(by default, 100)</param>
         /// <param name="exact">(True by default) - If False and name has value will return accounts containing name value in it's name (multiple accounts can match)</param>
         /// <param name="minBalance">PASCURRENCY - If have value, will filter by current account balance</param>
         /// <param name="maxBalance">PASCURRENCY - If have value, will filter by current account balance</param>
         /// <param name="encodedPublicKey">HEXASTRING - Will return accounts with this public key. NOTE: When searching by public key the start param value is the position of indexed public keys list instead of accounts numbers</param>
         /// <param name="b58PublicKey">String - Will return accounts with this public key. NOTE: When searching by public key the start param value is the position of indexed public keys list instead of accounts numbers</param>
-        public Task<Response<Account[]>> FindAccountsAsync(string name = null, uint? type = null, uint? start = null, uint? max = null, bool? exact = null, decimal? minBalance = null, decimal? maxBalance = null, string encodedPublicKey = null, string b58PublicKey = null)
+        public Task<Response<Account[]>> FindAccountsAsync(string name = null, uint? type = null, uint? start = null, uint? end = null, uint? max = null, bool? exact = null, decimal? minBalance = null, decimal? maxBalance = null, string encodedPublicKey = null, string b58PublicKey = null)
         {
             var parameters = new
             {
                 name,
                 type,
                 start,
+                end,
                 max,
                 exact,
                 min_balance = minBalance,
