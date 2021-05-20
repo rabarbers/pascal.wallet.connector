@@ -532,7 +532,7 @@ namespace Pascal.Wallet.Connector
         /// <summary>Creates and signs a "DATA" operation for later use</summary>
         /// <param name="signerAccount">The signer of the operation</param>
         /// <param name="senderAccount">The sender of the operation. If the sender is null, the signer will be used (default = signer)</param>
-        /// <param name="receiverAccount">The account where the DATA operation is send to. If the target is null, the sender or (if null) the signer is used (default = sender or signer)</param>
+        /// <param name="receiverAccount">The account where the DATA operation is send to.</param>
         /// <param name="guid">A 16 Bytes GUID in 8-4-4-4-12 format. If null or not given, the node will generate a UUID V4 (random)</param>
         /// <param name="lastNOperation">Last value of n_operation of the signerAccount (or senderAccount or receiverAccount)</param>
         /// <param name="dataType">The data type of the operation. If not given, the dataType will be 0 - ChatMessage</param>
@@ -1014,21 +1014,21 @@ namespace Pascal.Wallet.Connector
             return InvokeAsync<RawOperation>("operationsdelete", $"{{\"rawoperations\":\"{rawoperations}\",\"index\":{index}}}");
         }
 
-        /// <summary>Created EPasa object from valid ePasa string</summary>
+        /// <summary>Check that epasa parameter contains a valid E-PASA format</summary>
         /// <param name="ePasa">EPasa string</param>
-        /// <returns>Returns a EPasa object</returns>
+        /// <returns>Returns an EPasa object</returns>
         public Task<Response<EPasa>> CheckEPasaAsync(string ePasa)
         {
             return InvokeAsync<EPasa>("checkepasa", $"{{\"account_epasa\":\"{ePasa}\"}}");
         }
 
-        /// <summary>Created EPasa object from valid ePasa string</summary>
+        /// <summary>Creates an account epasa with provided data</summary>
         /// <param name="account">Valid number or account name(Use @ for a PayToKey)</param>
         /// <param name="payloadMethod"></param>
         /// <param name="payload">HEXASTRING with the payload data</param>
         /// <param name="password">Will be used if PayloadMethod = Aes</param>
         /// <param name="encodingType"></param>
-        /// <returns>Returns a EPasa object</returns>
+        /// <returns>Returns an EPasa object</returns>
         public Task<Response<EPasa>> ValidateEPasaAsync(string account, string payload, PayloadEncode? encodingType = PayloadEncode.String, PayloadMethod payloadMethod = PayloadMethod.None, string password = null)
         {
             var parameters = new

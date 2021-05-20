@@ -11,13 +11,16 @@ namespace Pascal.Wallet.Connector.DTO
     public enum ErrorCode
     {
         InternalError = 100,
+        MethodNotImplemented = 101,
         MethodNotFound = 1001,
         InvalidAccount = 1002,
         InvalidBlock = 1003,
         InvalidOperation = 1004,
         InvalidPublicKey = 1005,
+        InvalidAccountName = 1006,
         NotFound = 1010,
         WalletIsPasswordProtected = 1015,
-        InvalidData = 1016
+        InvalidData = 1016,
+        NoPermission = 1021
     }
 }

@@ -30,7 +30,7 @@ namespace Pascal.Wallet.Connector.DTO
         [JsonPropertyName("payload_encode")]
         public PayloadEncode PayloadEncode { get; set; }
 
-        /// <summary>"Encoded EPASA without extended checksum</summary>
+        /// <summary>Encoded EPASA without extended checksum</summary>
         [JsonPropertyName("account_epasa_classic")]
         public string AccountEPasaClassic { get; set; }
 
